@@ -13,21 +13,25 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    
+    env:
+      CI: false
 
     steps:
     - uses: actions/checkout@v2
-    - name: Build and test
+    - name: Setup node 10.x
       uses: actions/setup-node@v1
       with:
         node-version: '10.x'
-    - run: npm ci
-    - run: npm run build --if-present
+    - name: Install dependencies 
+      run: npm ci
+    - name: Build and test
+      run: npm run build --if-present
     #- run: npm test
-      env:
-        CI: false
+      
     - name: Save Artifacts
       uses: actions/upload-artifact@v1
       with:
         name: dist
-        path: dist
+        path: build
       
