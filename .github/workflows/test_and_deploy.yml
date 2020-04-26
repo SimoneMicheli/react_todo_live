@@ -23,10 +23,11 @@ jobs:
     - run: npm ci
     - run: npm run build --if-present
     #- run: npm test
+      env:
+        CI: false
     - name: Save Artifacts
       uses: actions/upload-artifact@v1
       with:
         name: dist
         path: dist
-      env:
-        CI: false
+      
