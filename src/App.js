@@ -53,7 +53,7 @@ class App extends React.Component {
     super()
 
     this.state={
-      list : [{title:'ciao',date:'prova'}]
+      list : [{title:'add delete button',date:'30-04-2020'}]
     }
 
   }
