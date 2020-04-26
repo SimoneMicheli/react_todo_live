@@ -49,8 +49,8 @@ jobs:
     - name: upload to Azure blob storage
       uses: bacongobbler/azure-blob-storage-upload@v1.1.1
       with:
-          source_dir: dist
-          container_name: $www
+          source_dir: 'dist'
+          container_name: '$www'
           connection_string: ${{ secrets.BLOB_STORAGE_CONN_STRING }}
           sync: true
       
