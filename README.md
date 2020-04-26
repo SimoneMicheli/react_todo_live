@@ -1,4 +1,11 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# ToDo app &middot; ![Build and create artifact](https://github.com/SimoneMicheli/react_todo_live/workflows/Build%20and%20create%20artifact/badge.svg) ![Build and Deploy on Azure](https://github.com/SimoneMicheli/react_todo_live/workflows/Build%20and%20Deploy%20on%20Azure/badge.svg)
+
+You could access to this project [Here](https://sareactdemo.z16.web.core.windows.net/).
+You could clone and modify this repo, merging in **master** is restricted through pull requests.
+
+## Installation
+
+Clone this repo and run `npm install`, this command will install all the required dependencies
 
 ## Available Scripts
 
@@ -66,3 +73,9 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+# CI/CD
+
+There are two actions configured for this repo:
+- **Build and create artifact** that runs on every pull request into master, it builds the code and produces the artifact ready to be reviewed
+- **Build and Deploy on Azure** runs after a push into master branch, it builds the code, produces the artifacts and deploy on Azure blob storage

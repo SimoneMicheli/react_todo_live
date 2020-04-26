@@ -1,0 +1,56 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Build and Deploy on Azure
+
+on:
+  push:
+    branches: [ master ]
+  #pull_request:
+  #  branches: [ master ]
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    
+    env:
+      CI: false
+
+    steps:
+    - name: checkout code
+      uses: actions/checkout@v2
+    - name: Setup node 10.x
+      uses: actions/setup-node@v1
+      with:
+        node-version: '10.x'
+    - name: Install dependencies 
+      run: npm ci
+    - name: Build and test
+      run: npm run build --if-present
+    - name: Save Artifacts
+      uses: actions/upload-artifact@v1
+      with:
+        name: dist
+        path: build
+
+  deploy:
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+    
+    - name: Download artifact
+      uses: actions/download-artifact@v1
+      with:
+          name: dist
+
+    - name: upload to Azure blob storage
+      uses: bacongobbler/azure-blob-storage-upload@v1.1.1
+      with:
+          source_dir: 'dist'
+          container_name: '$web'
+          connection_string: ${{ secrets.BLOB_STORAGE_CONN_STRING }}
+          sync: true
+      
